@@ -1,0 +1,129 @@
+{
+    "name": "choco",
+    "version": "1.0.0",
+    "description": "RESTful API Server used TypeScript",
+    "main": "src/app.js",
+    "scripts": {
+        "test:reporter": "./node_modules/.bin/opener ./coverage/lcov-report/index.html",
+        "test": "./node_modules/.bin/nyc ./node_modules/.bin/mocha --require ts-node/register --recursive && npm run test:reporter",
+        "start": "./node_modules/.bin/ts-node -- ./src/app.ts",
+        "mockserver": "npm run genswagger && cd mock && npm i && cd .. && ./node_modules/.bin/nodemon --watch ./src -e yaml -- ./mock/index.js",
+        "genswagger": "./node_modules/.bin/run-func ./mock/gen.js writeSwagger"
+    },
+    "author": "thaiwu",
+    "license": "ISC",
+    "dependencies": {
+        "body-parser": "^1.18.3",
+        "cors": "^2.8.4",
+        "express": "^4.16.3",
+        "inversify": "^4.13.0",
+        "inversify-binding-decorators": "^4.0.0",
+        "inversify-express-utils": "^6.1.0",
+        "ioredis": "^3.2.2",
+        "lodash": "^4.17.10",
+        "mocha": "^5.2.0",
+        "mysql2": "^1.5.3",
+        "reflect-metadata": "^0.1.12",
+        "sequelize": "^4.38.0",
+        "sequelize-typescript": "^0.6.5"
+    },
+    "devDependencies": {
+        "@types/express": "^4.16.0",
+        "@types/mocha": "^5.2.5",
+        "@types/node": "^10.5.2",
+        "@types/sequelize": "^4.27.24",
+        "chai": "^4.1.2",
+        "mocha-multi-reporters": "^1.1.7",
+        "mocha-typescript": "^1.1.17",
+        "mochawesome": "^3.0.2",
+        "nodemon": "^1.18.3",
+        "nyc": "^12.0.2",
+        "opener": "^1.4.3",
+        "run-func": "^1.0.2",
+        "ts-mockito": "^2.3.0",
+        "ts-node": "^7.0.0",
+        "typescript": "^2.9.2"
+    },
+    "lint-staged": {
+        "*.{ts,tsx}": [
+            "tslint"
+        ]
+    },
+    "nyc": {
+        "include": [
+            "src/**/*.ts"
+        ],
+        "extension": [
+            ".ts"
+        ],
+        "require": [
+            "ts-node/register"
+        ],
+        "exclude": [
+            "**/*.d.ts",
+            "src/config/",
+            "src/container/",
+            "src/context/",
+            "!src/context/BaseEntity.ts",
+            "src/exceptions/",
+            "src/tools/",
+            "src/middlewares/",
+            "src/sqlTemplate/",
+            "src/typings/",
+            "src/app.ts",
+            ".nyc_output/",
+            ".vscode/",
+            "config/",
+            "coverage/",
+            "doc/",
+            "logs/",
+            "mock/",
+            "node_modules/",
+            "test/",
+            "*.js",
+            "*.json",
+            "src/controllers/BaseController.ts",
+            "src/services/BaseService.ts",
+            "src/repositories/BaseRepository.ts",
+            "src/models/",
+            "src/utils/DaoOperator.ts",
+            "src/controllers/IController.ts",
+            "src/**/*.spec.ts",
+            "src/ServerEvent/",
+            "src/ioc/",
+            "src/microServices/",
+            "src/**/*Controller.ts",
+            "src/**/*Repository.ts"
+        ],
+        "reporter": [
+            "lcov",
+            "text",
+            "text-summary"
+        ],
+        "watermarks": {
+            "lines": [
+                80,
+                95
+            ],
+            "functions": [
+                80,
+                95
+            ],
+            "branches": [
+                80,
+                95
+            ],
+            "statements": [
+                80,
+                95
+            ]
+        },
+        "check-coverage": false,
+        "sourceMap": true,
+        "cache": false,
+        "exclude-after-remap": false,
+        "report-dir": "./coverage",
+        "instrument": true,
+        "all": true
+    }
+}

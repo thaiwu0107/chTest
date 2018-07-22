@@ -1,0 +1,22 @@
+import 'reflect-metadata';
+import { controller, httpGet, TYPE } from 'inversify-express-utils';
+import * as _ from 'lodash';
+import { inject, provideNamed } from '../../container/ioc';
+import BaseController from '../../models/BaseController';
+import BaseResponse from '../../models/BaseResponse';
+import IContext from '../../models/IContext';
+import Service from './Service';
+
+@controller('/test')
+export default class TestController extends BaseController {
+    constructor(
+        @inject('TestService') private service: Service) { super(); }
+
+    @httpGet('/')
+    public async test(ctx: IContext) {
+        let withoutHttpsIP = _.replace(ctx.request.header['x-forwarded-for'], 'http://', '');
+        withoutHttpsIP = _.replace(ctx.request.header['x-forwarded-for'], 'https://', '');
+        const ip = _.split(withoutHttpsIP, ':', 1)[0];
+        ctx.body = new BaseResponse(await this.service.test(ip));
+    }
+}

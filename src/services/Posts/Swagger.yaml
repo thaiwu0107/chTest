@@ -1,0 +1,56 @@
+paths:
+  '/posts/{userId}':
+    get:
+      tags:
+        - post
+      summary: 'findUserAllPost'
+      description: 'findUserAllPost'
+      deprecated: false
+      parameters:
+        - in: path
+          name: userId
+          type: integer
+          minimum: 0
+          required: true
+          default: 1
+      responses:
+        '200':
+          description: 'findUserAllPost'
+          schema:
+            type: object
+            required:
+              - status
+              - result
+            properties:
+              status:
+                type: integer
+                format: int32
+                enum:
+                  - 1
+                default: 1
+                example: 1
+              result:
+                type: object
+                properties:
+                  userId:
+                    description: 'userId'
+                    type: integer
+                    format: int32
+                    minimum: 1
+                    default: 1
+                    example: 1
+                  postID:
+                    description: 'postID'
+                    type: integer
+                    format: int32
+                    minimum: 1
+                    default: 1
+                    example: 1
+                  likes:
+                    description: 'likes'
+                    type: integer
+                    format: int32
+                    minimum: 1
+                    default: 1
+                    example: 1
+    

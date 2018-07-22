@@ -1,0 +1,49 @@
+paths:
+  '/user/':
+    post:
+      tags:
+        - user
+      summary: 'createUser'
+      description: 'createUser'
+      deprecated: false
+      responses:
+        '200':
+          description: 'createUser'
+          schema:
+            type: object
+            required:
+              - status
+              - result
+            properties:
+              status:
+                type: integer
+                format: int32
+                enum:
+                  - 1
+                default: 1
+                example: 1
+              result:
+                type: object
+                properties:
+                  userID:
+                    description: 'userID'
+                    type: integer
+                    format: int32
+                    minimum: 1
+                    default: 1
+                    example: 1
+                  posts:
+                    description: 'posts'
+                    type: integer
+                    format: int32
+                    minimum: 1
+                    default: 1
+                    example: 1
+                  likes:
+                    description: 'likes'
+                    type: integer
+                    format: int32
+                    minimum: 1
+                    default: 1
+                    example: 1
+    

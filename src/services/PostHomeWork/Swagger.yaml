@@ -1,0 +1,70 @@
+paths:
+  '/post/':
+    post:
+      tags:
+        - post
+      summary: 'createPost'
+      description: 'createPost'
+      deprecated: false
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            type: object
+            required:
+              - reqData
+            properties:
+              reqData:
+                type: object
+                required:
+                  - userId
+                properties:
+                  userId:
+                    description: 'userId'
+                    type: integer
+                    format: int32
+                    minimum: 0
+                    default: 1
+                    example: 1
+      responses:
+        '200':
+          description: 'createPost'
+          schema:
+            type: object
+            required:
+              - status
+              - result
+            properties:
+              status:
+                type: integer
+                format: int32
+                enum:
+                  - 1
+                default: 1
+                example: 1
+              result:
+                type: object
+                properties:
+                  userId:
+                    description: 'userId'
+                    type: integer
+                    format: int32
+                    minimum: 1
+                    default: 1
+                    example: 1
+                  postID:
+                    description: 'postID'
+                    type: integer
+                    format: int32
+                    minimum: 1
+                    default: 1
+                    example: 1
+                  likes:
+                    description: 'likes'
+                    type: integer
+                    format: int32
+                    minimum: 1
+                    default: 1
+                    example: 1
+    

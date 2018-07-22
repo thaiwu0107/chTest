@@ -1,0 +1,34 @@
+paths:
+  '/create/':
+    post:
+      tags:
+        - create
+      summary: 'create tables'
+      description: '創建或是初始化user, post, like三個table'
+      deprecated: false
+      responses:
+        '200':
+          description: '創建完成'
+          schema:
+            type: object
+            required:
+              - status
+              - result
+            properties:
+              status:
+                type: integer
+                format: int32
+                enum:
+                  - 1
+                  - 9001
+                default: 1
+                example: 1
+              result:
+                type: object
+                properties:
+                  message:
+                    description: '成功或是失敗訊息'
+                    type: string
+                    default: 'ERROR'
+                    example: 'ERROR'
+    
